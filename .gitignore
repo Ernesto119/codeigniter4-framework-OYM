@@ -7,13 +7,13 @@ env
 # Mantener la carpeta writable, pero no sus contenidos en runtime
 
 # Ignorar contenido dinámico
-writable/cache/
-writable/logs/
-writable/session/
-writable/uploads/
-writable/debugbar/
+writable/cache/*
+writable/logs/*
+writable/session/*
+writable/uploads/*
+writable/debugbar/*
 
-public/uploads/
+public/uploads/*
 
 *.log
 Thumbs.db
