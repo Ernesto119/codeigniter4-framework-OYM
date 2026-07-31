@@ -21,8 +21,6 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 COPY . /var/www/html/
 
 RUN mkdir -p /var/www/html/writable && chown -R www-data:www-data /var/www/html/writable
-# Ajustar permisos a la carpeta writable
-RUN chown -R www-data:www-data /var/www/html/writable
 
 WORKDIR /var/www/html
 
