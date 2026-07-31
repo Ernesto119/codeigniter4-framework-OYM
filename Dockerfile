@@ -24,8 +24,11 @@ COPY . /var/www/html/
 
 # Ajustar permisos a la carpeta writable
 # Dar permisos a las carpetas escribibles de CodeIgniter
-RUN chown -R www-data:www-data /var/www/html/writable \
-    && chmod -R 775 /var/www/html/writable
+
+RUN chmod -R 755 writable/ 
+
+RUN chown -R www-data:www-data /var/www/html/writable/
+
 WORKDIR /var/www/html
 
 EXPOSE 80
