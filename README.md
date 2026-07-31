@@ -1,61 +1,110 @@
-# CodeIgniter 4 Framework
+# API de productos
 
-## What is CodeIgniter?
+Esta API permite listar, crear, actualizar y eliminar productos desde una aplicación CodeIgniter 4.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## URL base
 
-This repository holds the distributable version of the framework.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+Si estás ejecutando el proyecto con Docker Compose, la API queda disponible en:
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+- http://localhost:8080/api/productos
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+## Endpoints
 
-## Important Change with index.php
+### 1. Listar productos
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+- Método: GET
+- Ruta: /api/productos
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+Ejemplo:
 
-**Please** read the user guide for a better explanation of how CI4 works!
+```bash
+curl http://localhost:8080/api/productos
+```
 
-## Repository Management
+### 2. Ver un producto por ID
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+- Método: GET
+- Ruta: /api/productos/{id}
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+Ejemplo:
 
-## Contributing
+```bash
+curl http://localhost:8080/api/productos/1
+```
 
-We welcome contributions from the community.
+### 3. Crear un producto
 
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
+- Método: POST
+- Ruta: /api/productos
+- Header: Content-Type: application/json
 
-## Server Requirements
+Ejemplo:
 
-PHP version 8.2 or higher is required, with the following extensions installed:
+```bash
+curl -X POST http://localhost:8080/api/productos \
+  -H "Content-Type: application/json" \
+  -d '{"nombre":"Mesa","precio":150000}'
+```
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+También puedes enviar un arreglo de productos:
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - The end of life date for PHP 8.1 was December 31, 2025.
-> - If you are still using below PHP 8.2, you should upgrade immediately.
-> - The end of life date for PHP 8.2 will be December 31, 2026.
+```bash
+curl -X POST http://localhost:8080/api/productos \
+  -H "Content-Type: application/json" \
+  -d '[{"nombre":"Silla","precio":50000},{"nombre":"Lámpara","precio":80000}]'
+```
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+### 4. Actualizar un producto
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+- Método: PUT
+- Ruta: /api/productos/{id}
+- Header: Content-Type: application/json
+
+Ejemplo:
+
+```bash
+curl -X PUT http://localhost:8080/api/productos/1 \
+  -H "Content-Type: application/json" \
+  -d '{"nombre":"Mesa actualizada","precio":180000}'
+```
+
+### 5. Eliminar un producto
+
+- Método: DELETE
+- Ruta: /api/productos/{id}
+
+Ejemplo:
+
+```bash
+curl -X DELETE http://localhost:8080/api/productos/1
+```
+
+## Formato de datos
+
+Los productos esperan estos campos:
+
+- nombre: string
+- precio: number
+
+Ejemplo de cuerpo JSON:
+
+```json
+{
+  "nombre": "Producto de ejemplo",
+  "precio": 25000
+}
+```
+
+## Respuestas esperadas
+
+- Listar y consultar: devuelve un JSON con los datos del producto o productos.
+- Crear y actualizar: devuelve un mensaje de éxito.
+- Eliminar: devuelve un mensaje de confirmación.
+
+## Uso en Postman
+
+1. Abre Postman.
+2. Crea una nueva solicitud.
+3. Selecciona el método HTTP correspondiente.
+4. Ingresa la URL, por ejemplo: http://localhost:8080/api/productos.
+5. Si es POST o PUT, agrega el header `Content-Type: application/json` y el cuerpo JSON.

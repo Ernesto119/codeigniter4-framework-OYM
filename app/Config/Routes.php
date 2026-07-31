@@ -3,7 +3,7 @@
 use CodeIgniter\Router\RouteCollection;
 
 /** @var RouteCollection $routes */
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Productos::index');
 $routes->get('/productos', 'Productos::index');
 $routes->get('/productos/crear', 'Productos::crear');
 $routes->post('/productos/guardar', 'Productos::guardar');

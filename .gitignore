@@ -2,17 +2,25 @@
 vendor/
 
 
+vendor/
+
 .env
 .env.
 env
 
+# Mantener la carpeta writable, pero no sus contenidos en runtime
+writable/*
+!writable/.gitkeep
 
-writable/
+# Ignorar contenido dinámico
+writable/cache/
+writable/logs/
+writable/session/
+writable/uploads/
+writable/debugbar/
+
 public/uploads/
 
-
+*.log
 Thumbs.db
 .DS_Store
-
-
-*.log

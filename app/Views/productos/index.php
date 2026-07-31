@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crud  CodeIgniter</title>
+    <title>Crud CodeIgniter</title>
     <!-- Esto es Bootstrap. Una sola línea trae todo el diseño -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body class="bg-light">
     <div class="container mt-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -25,18 +27,23 @@
             </thead>
             <tbody>
                 <?php foreach ($productos as $producto): ?>
-                <tr>
-                    <td><?= $producto['id'] ?></td>
-                    <td><strong><?= $producto['nombre'] ?></strong></td>
-                    <td>$<?= $producto['precio'] ?></td>
-                    <td>
-                        <a href="/productos/editar/<?= $producto['id'] ?>" class="btn btn-warning btn-sm">✏️ Editar</a>
-                        <a href="/productos/eliminar/<?= $producto['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este producto?')">🗑️ Eliminar</a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td><?= $producto['id'] ?></td>
+                        <td><strong><?= $producto['nombre'] ?></strong></td>
+                        <td>$<?= $producto['precio'] ?></td>
+                        <td>
+                            <a href="/productos/editar/<?= $producto['id'] ?>" class="btn btn-warning btn-sm">✏️ Editar</a>
+                            <a href="/productos/eliminar/<?= $producto['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este producto?')">🗑️ Eliminar</a>
+                        </td>
+                    </tr>
                 <?php endforeach; ?>
+                <div class="mt-4 alert alert-info">
+                    <strong>Uso de la API:</strong> puedes consultar los productos en <code>/api/productos</code> con GET o /api/productos/{id} para consultar 1 en especifico, crear nuevos con POST y editar o eliminar con PUT/DELETE escribiendo /api/productos/{id}.
+                </div>
+
             </tbody>
         </table>
     </div>
 </body>
+
 </html>
